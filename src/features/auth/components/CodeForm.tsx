@@ -1,13 +1,17 @@
 "use client";
 
-import { CodeInput } from "@/components/CodeInput";
 import { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
+import { useEmailStore } from "@/stores/emailStore";
+import { CodeInput } from "@/components/CodeInput";
+import { useCredentialLogin } from "../hooks/useCredentialLogin";
 import { useSendCodeEmail } from "../hooks/useSendCodeEmail";
 
 export const CodeForm = () => {
+  const { mutate: resendCode } = useCredentialLogin();
+  const { mutate: sendEmailCode, error, isPending } = useSendCodeEmail();
+  const { email } = useEmailStore();
   const [code, setCode] = useState<(string | null)[]>([null, null, null, null]);
-  const { mutate: sendEmailCode, error } = useSendCodeEmail();
 
   const onSubmit = (data: (string | null)[]) => {
     const code = data.join("");
@@ -15,9 +19,11 @@ export const CodeForm = () => {
     sendEmailCode({ code });
   };
 
-  const sendNewCode = () => {
-    console.log("Código enviado com sucesso");
-  }
+  const sendCode = (email: any) => {
+    resendCode({
+      data: { email },
+    });
+  };
 
   return (
     <>
@@ -28,20 +34,38 @@ export const CodeForm = () => {
             onChange={setCode}
             onFirstComplete={onSubmit}
           />
-          <span className="text-blue-600 cursor-pointer">Reenviar código</span>
+          <span
+            onClick={() => sendCode(email)}
+            className="text-blue-600 cursor-pointer"
+          >
+            Reenviar código
+          </span>
         </div>
-
-        {error && <span className="text-red-600">{error?.message}</span>}
       </div>
 
-      <Button
-        disabled={!error}
-        className="rounded-lg w-full"
-        variant="outlined"
-        onClick={() => onSubmit(code)}
-      >
-        Confirmar código
-      </Button>
+      {isPending && (
+        <div className="flex justify-center">
+          <CircularProgress size={75} />
+        </div>
+      )}
+
+      {!isPending && (
+        <div className="flex flex-col gap-4">
+          {error && (
+            <span className="text-red-600">
+              Código incorreto! Preencha corretamente ou reenvie o código e tente novamente.
+            </span>
+          )}
+          <Button
+            disabled={!error}
+            className="rounded-lg w-full"
+            variant="outlined"
+            onClick={() => onSubmit(code)}
+          >
+            Confirmar código
+          </Button>
+        </div>
+      )}
     </>
   );
 };

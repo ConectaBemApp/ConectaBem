@@ -1,36 +1,33 @@
 // import { useSession } from '@/stores/useSession';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-
-const codeTest = '1234';
+import { api } from "@/libs/api";
+import { useEmailStore } from "@/stores/emailStore";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export const useSendCodeEmail = () => {
   const router = useRouter();
-  // const { session } = useSession();
+  const { email, exists, setExists } = useEmailStore();
 
   return useMutation({
     mutationFn: async ({ code }: Data) => {
-      if (code !== codeTest) {
-        throw new Error('Código inválido');
-      }
+      const response = await api.post(`auth/checkOTP`, {
+        email,
+        OTP: code,
+      });
+
+      const data = response.data;
+
+      setExists(data.message.email.exists);
+
+      return data;
     },
     onSuccess: () => {
-      router.refresh();
+      if (!exists) {
+        return router.push(`/auth/register`);
+      }
 
-      // if (!session?.email?.isConfirmed) {
-      //   return router.push(`/auth/register`);
-      // }
-
-      router.push(`/auth/register`);
-
-
-      // router.push(`/`);
-    },
-    onError: (error) => {
-      router.refresh();
-
-      console.log(error.message);
-    },
+      router.push(`/home`);
+    }
   });
 };
 

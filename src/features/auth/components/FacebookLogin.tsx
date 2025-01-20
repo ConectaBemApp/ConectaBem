@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 
-export default function FacebookSign() {
+export default function FacebookLogin() {
   return (
     <Button
       className="text-black bg-white text-sm "

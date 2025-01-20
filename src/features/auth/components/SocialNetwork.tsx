@@ -1,12 +1,12 @@
 'use client';
 
-import FacebookSign from './FacebookSign';
-import { GoogleSign } from './GoogleSign';
+import FacebookSign from './FacebookLogin';
+import { GoogleLogin } from './GoogleLogin';
 
 export const SocialNetwork = () => {
   return (
     <div className="flex flex-col gap-6">
-      <GoogleSign />
+      <GoogleLogin />
 
       <FacebookSign />
     </div>

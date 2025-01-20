@@ -1,22 +1,20 @@
 "use client";
 
 import { WelcomeSectionHeader } from "@/components/WelcomeSectionHeader";
-import { CodeForm } from "@/features/auth/components/CodeForm";
-// import { useSession } from '@/stores/useSession';
-import { Button, Divider } from "@mui/material";
+import { CodeForm } from "@/features/auth/components/CodeForm/CodeForm";
+import { useEmailStore } from "@/stores/emailStore";
+import { Divider } from "@mui/material";
 import { FaRegQuestionCircle } from "react-icons/fa";
 
 export default function ConfirmCode() {
-  // const { session } = useSession();
-
-  // console.log(session);
+  const { email } = useEmailStore();
 
   return (
     <main className="flex justify-center">
       <div className="flex flex-col md:max-w-[450px] justify-center gap-8">
         <WelcomeSectionHeader
           href="/auth"
-          title={`Digite o código enviado para email@email.com!`}
+          title={`Digite o código enviado para ${email}!`}
         />
 
         <CodeForm />

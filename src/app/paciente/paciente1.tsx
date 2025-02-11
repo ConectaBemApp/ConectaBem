@@ -5,7 +5,7 @@ import { LuMessageCircleQuestion } from "react-icons/lu";
 
 
 
-const PatientRegistration: React.FC = () => {
+const PatientRegistration1: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [birthDate, setBirthDate] = useState<string>('');
   const [errors, setErrors] = useState<{ name?: string; birthDate?: string }>({});
@@ -83,4 +83,4 @@ const PatientRegistration: React.FC = () => {
   );
 };
 
-export default PatientRegistration;
+export default PatientRegistration1;

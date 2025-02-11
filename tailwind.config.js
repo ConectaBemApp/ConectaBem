@@ -6,6 +6,12 @@ module.exports = {
       colors: {
         buttonColor: '#D7FF7B',
       },
+      width: {
+        '452':'452px'
+      },
+      height: {
+        '692':'692px'
+      }
     },
   },
   plugins: [],

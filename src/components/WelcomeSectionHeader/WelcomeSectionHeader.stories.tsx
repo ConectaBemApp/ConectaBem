@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { WelcomeSectionHeader } from "../WelcomeSectionHeader";
+import { WelcomeSectionHeader } from "../WelcomeSectionHeader/WelcomeSectionHeader";
 
 export default {
   title: "Auth/WelcomeSectionHeader",

@@ -6,8 +6,8 @@ import { ReactQueryClientProvider } from "@/providers/ReactQueryProvider";
 import { MuiThemeProvider } from "@/providers/MuiThemeProvider";
 import { Toaster } from "react-hot-toast";
 import { SessionProviderAuth } from "@/providers/SessionProvider";
-import PatientRegistration1 from "./paciente/paciente1";
-import PatientRegistration2 from "./paciente/paciente2";
+import PatientRegistration1 from "../cadastro-de-paciente 1";
+import PatientRegistration2 from "../cadastro-de-paciente 2";
 
 export const metadata = {
   title: "ConectaBem",

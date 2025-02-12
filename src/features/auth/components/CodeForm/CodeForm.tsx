@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { Button, CircularProgress } from "@mui/material";
 import { useEmailStore } from "@/stores/emailStore";
-import { CodeInput } from "@/components/CodeInput";
-import { useCredentialLogin } from "../hooks/useCredentialLogin";
-import { useSendCodeEmail } from "../hooks/useSendCodeEmail";
+import { CodeInput } from "@/components/CodeInput/CodeInput";
+import { useSendCodeEmail } from "../../hooks/useSendCodeEmail";
+import { useCredentialLogin } from "../../hooks/useCredentialLogin";
 
 export const CodeForm = () => {
   const { mutate: resendCode } = useCredentialLogin();
@@ -21,7 +21,9 @@ export const CodeForm = () => {
 
   const sendCode = (email: any) => {
     resendCode({
-      data: { email },
+      data: {
+        email,
+      },
     });
   };
 
@@ -53,7 +55,8 @@ export const CodeForm = () => {
         <div className="flex flex-col gap-4">
           {error && (
             <span className="text-red-600">
-              Código incorreto! Preencha corretamente ou reenvie o código e tente novamente.
+              Código incorreto! Preencha corretamente ou reenvie o código e
+              tente novamente.
             </span>
           )}
           <Button

@@ -1,4 +1,4 @@
-import { WelcomeSectionHeader } from '@/components/WelcomeSectionHeader';
+import { WelcomeSectionHeader } from '@/components/WelcomeSectionHeader/WelcomeSectionHeader';
 import { Button } from '@mui/material';
 import { FaRegQuestionCircle } from 'react-icons/fa';
 

@@ -17,19 +17,25 @@ const schema = z.object({
 
 export const AuthForm = () => {
   const { mutate: login, isPending } = useCredentialLogin();
+  const session = useSession();
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      signOut();
+    }
+  }, [session]);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Data>({
+    mode: "all",
     resolver: zodResolver(schema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    login({
-      data: data,
-    });
+    login({email: data.email});
   });
 
   return (

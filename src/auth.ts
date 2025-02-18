@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Facebook from "next-auth/providers/facebook";
 import Google from "next-auth/providers/google";
-import { useEmailStore } from "./stores/emailStore";
+import { useEmailStore } from "./features/auth/stores/useAuthStore";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Facebook, Google],

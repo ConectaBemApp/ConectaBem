@@ -1,16 +1,17 @@
 "use client";
 
-import { WelcomeSectionHeader } from "@/components/WelcomeSectionHeader/WelcomeSectionHeader";
+import { FormMultiStep } from "@/components/FormMultiStep";
 import { CodeForm } from "@/features/auth/components/CodeForm/CodeForm";
 import { useCredentialLogin } from "@/features/auth/hooks/useCredentialLogin";
-import { useEmailStore } from "@/stores/emailStore";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import { Divider } from "@mui/material";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaRegQuestionCircle } from "react-icons/fa";
 
 export default function ConfirmCode() {
-  const { email, setEmail } = useEmailStore();
+  const { email, setEmail } = useAuthStore();
   const { mutate: login } = useCredentialLogin();
   const session = useSession();
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -18,9 +19,7 @@ export default function ConfirmCode() {
   useEffect(() => {
     if (session.data?.user?.email && !hasSubmitted) {
       login({
-        data: {
-          email: session.data.user.email,
-        },
+        email: session.data.user.email,
       });
     }
 
@@ -34,10 +33,14 @@ export default function ConfirmCode() {
   return (
     <main className="flex justify-center">
       <div className="flex flex-col md:max-w-[450px] justify-center gap-8">
-        <WelcomeSectionHeader
-          href="/auth"
-          title={`Digite o código enviado para ${email}!`}
-        />
+        <FormMultiStep.Header>
+          <Link href={"/auth"}>
+            <FormMultiStep.BackStepButton />
+          </Link>
+          <FormMultiStep.Title>
+            Digite o código enviado para {email}!
+          </FormMultiStep.Title>
+        </FormMultiStep.Header>
 
         <CodeForm />
 

@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
-    <footer className="bg-blue-800 flex flex-col items-center">
-      <div className="flex gap-10 p-4 w-full justify-center">
+    <footer className="bg-blue-800 flex flex-col ">
+      <div className="flex gap-10 p-4 w-full px-10">
         <div className="flex flex-col gap-2">
           <h4 className="text-button font-bold">Suporte</h4>
           <ul className="flex flex-col gap-1 text-white/70">
@@ -28,13 +28,13 @@ export const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="flex flex-col gap-2 items-center justify-center text-white bg-blue-950 w-full py-2 px-4">
+      {/* <div className="flex flex-col gap-2 items-center justify-center text-white bg-blue-950 w-full py-2 px-4">
         <div className="flex gap-4">
           <span>Termos de uso</span>
           <span>Politica de privacidade</span>
         </div>
         <span className="text-xs opacity-70">© 2025-{new Date().getFullYear()}</span>
-      </div>
+      </div> */}
     </footer>
   );
 };

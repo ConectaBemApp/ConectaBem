@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { SocialNetwork } from "../SocialNetwork";
+import { SocialNetwork } from "../SocialNetwork/SocialNetwork";
 import { SessionProvider } from "next-auth/react";
 
 export default {

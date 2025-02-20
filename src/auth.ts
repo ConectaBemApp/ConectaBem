@@ -15,6 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       session.sessionToken = token.id_token as string;
 
+      session.user.email = token.email as string;
+
       return session;
     },
   },
